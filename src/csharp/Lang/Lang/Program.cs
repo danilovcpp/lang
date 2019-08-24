@@ -22,7 +22,6 @@ namespace Lang
 
 			Console.WriteLine(new PrinterVisitor().Print(expression));
 
-			/*
 			if (args.Length > 1)
 			{
 				Console.WriteLine("Usage lang [script]");
@@ -34,7 +33,7 @@ namespace Lang
 			else
 			{
 				RunPrompt();
-			}*/
+			}
 		}
 
 		static void RunFile(string path)
@@ -60,10 +59,15 @@ namespace Lang
 			var scanner = new Scanner(source);
 			var tokens = scanner.ScanTokens();
 
-			foreach (var token in tokens)
+			var parser = new Parser(tokens);
+			var expression = parser.Parse();
+
+			Console.WriteLine(new PrinterVisitor().Print(expression));
+
+			/*foreach (var token in tokens)
 			{
 				Console.WriteLine(token);
-			}
+			}*/
 		}
 
 
