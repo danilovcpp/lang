@@ -12,5 +12,10 @@ namespace Lang
 		{
 			_literal = literal;
 		}
+
+		public override T Accept<T>(IVisitor<T> visitor)
+		{
+			return visitor.VisitLiteralExpression(this);
+		}
 	}
 }

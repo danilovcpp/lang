@@ -14,5 +14,10 @@ namespace Lang
 			_operation = operation;
 			_right = right;
 		}
+
+		public override T Accept<T>(IVisitor<T> visitor)
+		{
+			return visitor.VisitUnaryExpression(this);
+		}
 	}
 }
