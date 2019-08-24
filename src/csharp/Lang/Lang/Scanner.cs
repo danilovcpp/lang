@@ -174,7 +174,8 @@ namespace Lang
 		{
 			while (Peek() != '"' && !IsAtEnd())
 			{
-				if (Peek() == '\n') _line++;
+				if (Peek() == '\n')
+					_line++;
 
 				Advance();
 			}
@@ -189,7 +190,7 @@ namespace Lang
 			Advance();
 
 			// Trim the surrounding quotes
-			var value = _source.Substring(_start + 1, _current - _start - 1);
+			var value = _source.Substring(_start + 1, _current - _start - 2);
 			AddToken(TokenType.String, value);
 		}
 
