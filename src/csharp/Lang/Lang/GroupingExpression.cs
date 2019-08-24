@@ -6,11 +6,11 @@ namespace Lang
 {
 	public class GroupingExpression : Expression
 	{
-		private readonly Expression _expression;
+		public Expression Expression { get; }
 
 		public GroupingExpression(Expression expression)
 		{
-			_expression = expression;
+			Expression = expression;
 		}
 
 		public override T Accept<T>(IVisitor<T> visitor)

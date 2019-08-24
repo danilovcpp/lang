@@ -9,6 +9,20 @@ namespace Lang
 
 		static void Main(string[] args)
 		{
+			var expression = new BinaryExpression(
+				new UnaryExpression(
+					new Token(TokenType.Minus, "-", null, 1),
+					new LiteralExpression(123)
+				),
+				new Token(TokenType.Star, "*", null, 1),
+				new GroupingExpression(
+					new LiteralExpression(45.67)
+				)
+			);
+
+			Console.WriteLine(new PrinterVisitor().Print(expression));
+
+			/*
 			if (args.Length > 1)
 			{
 				Console.WriteLine("Usage lang [script]");
@@ -20,7 +34,7 @@ namespace Lang
 			else
 			{
 				RunPrompt();
-			}
+			}*/
 		}
 
 		static void RunFile(string path)

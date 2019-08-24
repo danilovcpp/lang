@@ -6,13 +6,13 @@ namespace Lang
 {
 	public class UnaryExpression : Expression
 	{
-		private readonly Token _operation;
-		private readonly Expression _right;
+		public Token Operation { get; }
+		public Expression Right { get; }
 
 		public UnaryExpression(Token operation, Expression right)
 		{
-			_operation = operation;
-			_right = right;
+			Operation = operation;
+			Right = right;
 		}
 
 		public override T Accept<T>(IVisitor<T> visitor)

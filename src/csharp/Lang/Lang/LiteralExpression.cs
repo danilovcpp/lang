@@ -6,11 +6,11 @@ namespace Lang
 {
 	public class LiteralExpression : Expression
 	{
-		private readonly object _literal;
+		public object Value { get; }
 
-		public LiteralExpression(object literal)
+		public LiteralExpression(object value)
 		{
-			_literal = literal;
+			Value = value;
 		}
 
 		public override T Accept<T>(IVisitor<T> visitor)

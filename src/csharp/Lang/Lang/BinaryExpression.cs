@@ -6,15 +6,15 @@ namespace Lang
 {
 	public class BinaryExpression : Expression
 	{
-		private readonly Expression _left;
-		private readonly Expression _right;
-		private readonly Token _operation;
+		public Expression Left { get; }
+		public Expression Right { get; }
+		public Token Operation { get; }
 
 		public BinaryExpression(Expression left, Token operation, Expression right)
 		{
-			_left = left;
-			_operation = operation;
-			_right = right;
+			Left = left;
+			Operation = operation;
+			Right = right;
 		}
 
 		public override T Accept<T>(IVisitor<T> visitor)
