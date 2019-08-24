@@ -12,15 +12,18 @@ namespace Lang
 			var expression = new BinaryExpression(
 				new UnaryExpression(
 					new Token(TokenType.Minus, "-", null, 1),
-					new LiteralExpression(123)
+					new LiteralExpression(2.0)
 				),
 				new Token(TokenType.Star, "*", null, 1),
 				new GroupingExpression(
-					new LiteralExpression(45.67)
+					new LiteralExpression(5.0)
 				)
 			);
 
-			Console.WriteLine(new PrinterVisitor().Print(expression));
+			Console.WriteLine(new Printer().Print(expression));
+
+			var interpreter = new Interpreter();
+			interpreter.Interpret(expression);
 
 			if (args.Length > 1)
 			{
@@ -62,7 +65,10 @@ namespace Lang
 			var parser = new Parser(tokens);
 			var expression = parser.Parse();
 
-			Console.WriteLine(new PrinterVisitor().Print(expression));
+			Console.WriteLine(new Printer().Print(expression));
+
+			var interpreter = new Interpreter();
+			interpreter.Interpret(expression);
 
 			/*foreach (var token in tokens)
 			{

@@ -12,7 +12,7 @@ namespace Lang
 		private int _current = 0;
 		private int _line = 1;
 
-		private static readonly Dictionary<string, TokenType> _keywords = new Dictionary<string, TokenType>
+		private static readonly Dictionary<string, TokenType> Keywords = new Dictionary<string, TokenType>
 		{
 			["and"] = TokenType.And,
 			["class"] = TokenType.Class,
@@ -145,9 +145,9 @@ namespace Lang
 
 			var text = _source.Substring(_start, _current - _start);
 
-			if (_keywords.ContainsKey(text))
+			if (Keywords.ContainsKey(text))
 			{
-				AddToken(_keywords[text]);
+				AddToken(Keywords[text]);
 				return;
 			}
 

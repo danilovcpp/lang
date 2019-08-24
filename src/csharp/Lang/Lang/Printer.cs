@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Lang
 {
-	public class PrinterVisitor : IVisitor<string>
+	public class Printer : IVisitor<string>
 	{
 		public string Print(Expression expression)
 		{
