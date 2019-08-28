@@ -56,15 +56,9 @@ namespace Lang
 			return null;
 		}
 
-		public object VisitGroupingExpression(GroupingExpression expression)
-		{
-			return Evaluate(expression.Expression);
-		}
+		public object VisitGroupingExpression(GroupingExpression expression) => Evaluate(expression.Expression);
 
-		public object VisitLiteralExpression(LiteralExpression expression)
-		{
-			return expression.Value;
-		}
+		public object VisitLiteralExpression(LiteralExpression expression) => expression.Value;
 
 		public object VisitUnaryExpression(UnaryExpression expression)
 		{
@@ -82,10 +76,7 @@ namespace Lang
 			return null;
 		}
 
-		private object Evaluate(Expression expression)
-		{
-			return expression.Accept(this);
-		}
+		private object Evaluate(Expression expression) => expression.Accept(this);
 
 		private bool IsTruthy(object @object)
 		{
