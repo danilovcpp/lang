@@ -4,19 +4,37 @@ using System.Text;
 
 namespace Lang
 {
-	public class Interpreter : IVisitor<object>
+	public class Interpreter : IExpressionVisitor<object>, IStatementVisitor<object>
 	{
-		public void Interpret(Expression expression)
+		public void Interpret(List<Statement> statements)
 		{
 			try
 			{
-				var value = Evaluate(expression);
-				Console.WriteLine($"= {Stringify(value)}");
+				foreach (var statement in statements)
+				{
+					Execute(statement);
+				}
 			}
-			catch (Exception ex)
+			catch (Exception e)
 			{
-				Console.WriteLine(ex.Message);
+				Console.WriteLine(e);
+				throw;
 			}
+
+			//try
+			//{
+			//	var value = Evaluate(expression);
+			//	Console.WriteLine($"= {Stringify(value)}");
+			//}
+			//catch (Exception ex)
+			//{
+			//	Console.WriteLine(ex.Message);
+			//}
+		}
+
+		private void Execute(Statement statement)
+		{
+			statement.Accept(this);
 		}
 
 		public object VisitBinaryExpression(BinaryExpression expression)
@@ -99,6 +117,21 @@ namespace Lang
 			if (@object == null) return "null";
 
 			return @object.ToString();
+		}
+
+		public object VisitExpressionStatement(ExpressionStatement statement)
+		{
+			Evaluate(statement.Expression);
+
+			return null;
+		}
+
+		public object VisitPrintStatement(PrintStatement statement)
+		{
+			var value = Evaluate(statement.Expression);
+			Console.WriteLine(Stringify(value));
+
+			return null;
 		}
 	}
 }

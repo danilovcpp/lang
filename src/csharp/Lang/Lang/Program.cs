@@ -22,8 +22,8 @@ namespace Lang
 
 			Console.WriteLine(new Printer().Print(expression));
 
-			var interpreter = new Interpreter();
-			interpreter.Interpret(expression);
+			//var interpreter = new Interpreter();
+			//interpreter.Interpret(expression);
 
 			if (args.Length > 1)
 			{
@@ -63,17 +63,10 @@ namespace Lang
 			var tokens = scanner.ScanTokens();
 
 			var parser = new Parser(tokens);
-			var expression = parser.Parse();
-
-			Console.WriteLine(new Printer().Print(expression));
+			var statements = parser.Parse();
 
 			var interpreter = new Interpreter();
-			interpreter.Interpret(expression);
-
-			/*foreach (var token in tokens)
-			{
-				Console.WriteLine(token);
-			}*/
+			interpreter.Interpret(statements);
 		}
 
 

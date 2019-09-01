@@ -14,23 +14,56 @@ namespace Lang
 			_tokens = tokens;
 		}
 
-		public Expression Parse()
+		public List<Statement> Parse()
 		{
-			try
-			{
-				return Expression();
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex.Message);
+			List<Statement> statements = new List<Statement>();
 
-				return null;
+			while (!IsAtEnd())
+			{
+				statements.Add(Statement());
 			}
+
+			return statements;
+
+			//try
+			//{
+			//	return Expression();
+			//}
+			//catch (Exception ex)
+			//{
+			//	Console.WriteLine(ex.Message);
+
+			//	return null;
+			//}
 		}
 
 		private Expression Expression()
 		{
 			return Equality();
+		}
+
+		private Statement Statement()
+		{
+			if (Match(TokenType.Print))
+				return PrintStatement();
+
+			return ExpressionStatement();
+		}
+
+		private Statement PrintStatement()
+		{
+			var value = Expression();
+			Consume(TokenType.Semicolon, "Expect ';' after value.");
+			return new PrintStatement(value);
+		}
+
+		private Statement ExpressionStatement()
+		{
+			var expression = Expression();
+
+			Consume(TokenType.Semicolon, "Expect ';' after expression");
+
+			return new ExpressionStatement(expression);
 		}
 
 		private Expression Equality()

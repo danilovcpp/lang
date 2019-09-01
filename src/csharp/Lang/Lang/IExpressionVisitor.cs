@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Lang
 {
-	public interface IVisitor<T>
+	public interface IExpressionVisitor<T>
 	{
 		T VisitBinaryExpression(BinaryExpression expression);
 		T VisitGroupingExpression(GroupingExpression expression);
